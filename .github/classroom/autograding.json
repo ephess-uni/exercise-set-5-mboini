@@ -1,0 +1,54 @@
+{
+  "tests": [
+    {
+      "name": "Test Exercise 5_0",
+      "setup": "",
+      "run": "pytest -k 'ex_5_0'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Test Exercise 5_1",
+      "setup": "",
+      "run": "pytest -k 'ex_5_1'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Test Exercise 5_2",
+      "setup": "",
+      "run": "pytest -k 'ex_5_2'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Test Exercise 5_3",
+      "setup": "",
+      "run": "pytest -k 'ex_5_3'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    },
+    {
+      "name": "Test Exercise 5_4",
+      "setup": "",
+      "run": "pytest -k 'ex_5_4'",
+      "input": "",
+      "output": "",
+      "comparison": "included",
+      "timeout": 10,
+      "points": 10
+    }
+  ]
+}
