@@ -1,19 +1,31 @@
-""" ex_5_3.py
-This module contains an entry point that:
-
-- creates a CLi that accepts an input file of data to be processed
-- shifts and scales the data to a mean of 0 and a standard deviation 1
-- writes the file to the output file argument
-"""
 import numpy as np
+import os
 from argparse import ArgumentParser
 
-if __name__ == "__main__":
-    # Create your argument parser object here.
-    # Collect the filename arguments from the command line
-    # Rewrite your 5_3 logic here so that it utilizes the arguments passed from the command line.
+# Import the get_repository_root function from src.util or util
+try:
+    from src.util import get_repository_root
+except ImportError:
+    from util import get_repository_root
 
-    # Tests will run your command using a system call.
-    # To test your program with arguments, run it from the command line
-    # (see README.md for more details)
-    pass
+if __name__ == "__main__":
+    # Create the argument parser object
+    parser = ArgumentParser(description='Process input file of data, scale and shift to mean 0 and standard deviation 1, and save to output file')
+    parser.add_argument('input_file', help='path to input file of data')
+    parser.add_argument('output_file', help='path to output file')
+
+    # Parse the input and output file arguments from the command line
+    args = parser.parse_args()
+
+    # Load the input data from the input file
+    input_data = np.loadtxt(args.input_file)
+
+    # Scale and shift the data to have mean 0 and standard deviation 1
+    scaled_data = (input_data - input_data.mean(axis=0)) / input_data.std(axis=0)
+
+    # Create the output directory if it does not already exist
+    root_dir = get_repository_root()
+    os.makedirs(root_dir / "outputs", exist_ok=True)
+
+    # Save the processed data to the output file
+    np.savetxt(args.output_file, scaled_data, fmt='%.2e')
