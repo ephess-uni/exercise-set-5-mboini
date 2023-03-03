@@ -1,33 +1,36 @@
+""" ex_5_3.py
+This module contains an entry point that:
+
+- creates a CLi that accepts an input file of data to be processed
+- shifts and scales the data to a mean of 0 and a standard deviation 1
+- writes the file to the output file argument
+"""
 import numpy as np
 import os
 from argparse import ArgumentParser
 
-# Import the get_repository_root function from src.util or util
 try:
     from src.util import get_repository_root
 except ImportError:
     from util import get_repository_root
 
 if __name__ == "__main__":
-    # Create the argument parser object
-    parser = ArgumentParser(description='Process input file of data, scale and shift to mean 0 and standard deviation 1, and save to output file')
-    parser.add_argument('infile', help='path to input file of data',nargs='?')
-    parser.add_argument('outfile', help='path to output file'nargs='?')
+    # Create your argument parser object here.
+    # Collect the filename arguments from the command line
+    # Rewrite your 5_3 logic here so that it utilizes the arguments passed from the command line.
 
-    # Parse the input and output file arguments from the command line
-    args = parser.parse_args()
+    # Tests will run your command using a system call.
+    # To test your program with arguments, run it from the command line
+    # (see README.md for more details)
 
-    # Load the input data from the input file
-    input_data = np.loadtxt(args.infile)
-
-    # Scale and shift the data to have mean 0 and standard deviation 1
-    scaled_data1 = (input_data - input_data.mean(axis=0))
+    par = ArgumentParser(description='prints the data from the inputfile to the outputfile applying standard scale transform')
+    par.add_argument('infile',help='input file path',nargs='?')
+    par.add_argument('outfile',help='output file path',nargs='?')
+    arg_parse = par.parse_args()
+    input_data = np.loadtxt(arg_parse.infile)
+    scaled_data1 = (input_data - input_data.mean(axis=0)) 
     scaled_data2 = input_data.std(axis=0)
-    result = scaled_data1 / scaled_data2
-
-    # Create the output directory if it does not already exist
+    processed = scaled_data1/scaled_data2
     root_dir = get_repository_root()
     os.makedirs(root_dir / "outputs", exist_ok=True)
-
-    # Save the processed data to the output file
-    np.savetxt(args.outfile, result, fmt='%.2e')
+    np.savetxt(arg_parse.outfile, processed, fmt='%.2e')
